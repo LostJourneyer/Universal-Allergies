@@ -67,5 +67,7 @@ public class HeartBeat : MonoBehaviour {
 	private void unbalance(){
 	}
 	public void OnCollisionEnter(Collision other){
+		HighScores.SetHighScore(m_score);
+		Application.LoadLevel("HighScores");
 	}
 }
