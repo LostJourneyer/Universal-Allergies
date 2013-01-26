@@ -43,6 +43,8 @@ public class Character : MonoBehaviour
 			Enemy Foe = other.gameObject.GetComponent<Enemy>();
 			if(Allergies.ContainsKey((int)Foe.EnemyType))
 			{
+				Vector3 push = transform.position - other.collider.transform.position;
+				transform.position += push;
 				HitPoints -= Allergies[(int)Foe.EnemyType];
 				if(HitPoints <= 0)
 				{
