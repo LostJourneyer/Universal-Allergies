@@ -48,11 +48,11 @@ public class HeartBeat : MonoBehaviour {
 	{
 		m_score++;
 		float r=Random.Range(5, 10);
-/*		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
+		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
 			m_curMax=m_curMax*10;
 			m_curRate=m_curRate*10;
 		}else{
-*/			Vector3 newLoc=new Vector3(r,0f,0f);
+			Vector3 newLoc=new Vector3(r,0f,0f);
 			GameObject newMass=(GameObject)Instantiate(m_newMass,newLoc,Quaternion.identity);
 			Mass m=newMass.GetComponent<Mass>();
 			m.m_size=r;
@@ -62,8 +62,10 @@ public class HeartBeat : MonoBehaviour {
 			m.m_vel=Mathf.Sqrt(m_mass.m_size/(r*r*r*r))*new Vector3(0f,-1f,0f);
 //			m.m_vel=(Mathf.Sqrt(m_mass.m_size*m.m_size)/r)*new Vector3(0f,1f,0f);
 			Debug.Log(m.m_vel);
-//		}
+		}
 	}
 	private void unbalance(){
+	}
+	public void OnCollisionEnter(Collision other){
 	}
 }
