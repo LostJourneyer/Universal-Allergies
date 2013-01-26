@@ -3,21 +3,29 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
-	void Start ()
-	{
-	}
+	public CameraControl cam;
+	public Character[] character;
+	int currentChar = 0;
 	void Update ()
 	{
 		if(Input.anyKey)
 		{
 			if(Input.GetKey(KeyCode.UpArrow))
-				transform.position += Vector3.up;
+				character[currentChar].transform.position += Vector3.up;
 			if(Input.GetKey(KeyCode.DownArrow))
-				transform.position += Vector3.down;
+				character[currentChar].transform.position += Vector3.down;
 			if(Input.GetKey(KeyCode.LeftArrow))
-				transform.position += Vector3.left;
+				character[currentChar].transform.position += Vector3.left;
 			if(Input.GetKey(KeyCode.RightArrow))
-				transform.position += Vector3.right;
+				character[currentChar].transform.position += Vector3.right;
+			if(Input.GetKeyDown(KeyCode.Space))
+			{
+				currentChar++;
+				if(currentChar >= character.Length)
+					currentChar=0;
+				cam.NextCharacter(character[currentChar]);
+			}
 		}
+		cam.transform.position = new Vector3(character[currentChar].transform.position.x, character[currentChar].transform.position.y, -10.0f);
 	}
 }
