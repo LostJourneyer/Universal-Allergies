@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class HighScores : MonoBehaviour {
+	private static bool sm_updateScoreNames;
+	private static int sm_place;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +17,7 @@ public class HighScores : MonoBehaviour {
 	void Update () {
 		//use for navagation back
 	}
-	public static bool SetHighScore(int score)
+	public static void SetHighScore(int score)
 	{
 		if(!PlayerPrefs.HasKey("u_playerScore"+0)){
 			for(int i=0; i<10; i++){
@@ -31,10 +33,11 @@ public class HighScores : MonoBehaviour {
 					PlayerPrefs.SetString("u_playerName"+x, PlayerPrefs.GetString("u_playerName"+(x-1)));
 				}
 				PlayerPrefs.SetInt("u_playerScore"+i, score);
-				PlayerPrefs.SetString("u_playerName"+i, getName());
-				return true;
+				sm_place=i;
+				sm_updateScoreNames= true;
+				return;
 			}
 		}
-		return false;
+		sm_updateScoreNames= false;
 	}
 }
