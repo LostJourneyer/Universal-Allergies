@@ -2,11 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 public class HeartBeat : MonoBehaviour {
-	public float m_currentAudioOut;
 	public float m_particalMultiplyer=10;
+	public float m_colorMultiplyer;
+	public float m_tolerance;
+	public TextMesh m_ScoreDisplay;
 	
+	private float m_max=0.06877659f;		//max spectrum value
 	private AudioSource m_AS;
 	private ParticleSystem m_PS;
+	private int m_score=0;
 	
 	public void Start()
 	{	
@@ -15,16 +19,25 @@ public class HeartBeat : MonoBehaviour {
 	}
 	public void Update()
 	{
-        float[] spectrum = audio.GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
-        m_currentAudioOut =spectrum[0]*m_particalMultiplyer;
-		m_PS.startSpeed =m_currentAudioOut;
-/*		m_currentAudioOut=spectrum[i];
-        while (i < 1023) {
-            Debug.DrawLine(new Vector3(i - 1, spectrum[i] + 10, 0), new Vector3(i, spectrum[i + 1] + 10, 0), Color.red);
-            Debug.DrawLine(new Vector3(i - 1, Mathf.Log(spectrum[i - 1]) + 10, 2), new Vector3(i, Mathf.Log(spectrum[i]) + 10, 2), Color.cyan);
-            Debug.DrawLine(new Vector3(Mathf.Log(i - 1), spectrum[i - 1] - 10, 1), new Vector3(Mathf.Log(i), spectrum[i] - 10, 1), Color.green);
-            Debug.DrawLine(new Vector3(Mathf.Log(i - 1), Mathf.Log(spectrum[i - 1]), 3), new Vector3(Mathf.Log(i), Mathf.Log(spectrum[i]), 3), Color.yellow);
-            i++;
-        }
-*/	}
+        float[] spectrum = m_AS.GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
+		float normalizedSpect=Mathf.Min(1f, spectrum[0]/m_max);
+		Debug.Log("ns "+normalizedSpect+ ", Spect "+spectrum[0]+", m_max "+m_max);
+        m_PS.startSpeed =(normalizedSpect)*m_particalMultiplyer;
+		particleSystem.startColor=new Color(Mathf.Max(normalizedSpect,.9f),Mathf.Max(spectrum[1]/m_max,.7f),spectrum[2]/m_max,1f);
+		if(Input.GetKeyDown(KeyCode.Space)){
+			if(normalizedSpect>m_tolerance){
+				balance();
+			}else{
+				unbalance();
+			}
+		}
+		m_ScoreDisplay.text="Score:"+m_score;
+	}
+	private void balance()
+	{
+		m_score++;
+	}
+	private void unbalance()
+	{
+	}
 }
