@@ -1,0 +1,71 @@
+using UnityEngine;
+using System.Collections;
+
+public class PlayerControl : MonoBehaviour
+{
+	public CameraControl cam;
+	public Character[] character;
+	int currentChar = 0;
+	int numChars;
+	void Start()
+	{
+		numChars = character.Length;
+	}
+	void Update ()
+	{
+		if(Input.anyKey)
+		{
+			Character curChar = character[currentChar];
+			Transform past = curChar.transform;
+			if(Input.GetKey(KeyCode.UpArrow))
+			{
+				curChar.controller.Move(Vector3.up);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(-90,0,0)), 1.0f);
+			}
+			if(Input.GetKey(KeyCode.DownArrow))
+			{
+				curChar.controller.Move(Vector3.down);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(90,180,0)), 1.0f);
+			}
+			if(Input.GetKey(KeyCode.LeftArrow))
+			{
+				curChar.controller.Move(Vector3.left);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,-90,90)), 1.0f);
+			}
+			if(Input.GetKey(KeyCode.RightArrow))
+			{
+				curChar.controller.Move(Vector3.right);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,90,-90)), 1.0f);
+			}
+			if(Input.GetKeyDown(KeyCode.Space))
+			{
+				SwitchChar();
+			}
+			if(Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
+			{
+				curChar.Attack();
+			}
+		}
+		cam.setCamera(character[currentChar]);
+	}
+	void SwitchChar()
+	{
+		if(numChars > 1)
+		{
+			currentChar++;
+			if(currentChar >= character.Length)
+				currentChar=0;
+		}
+	}
+	public void KillMe(Character Char)
+	{
+		if(numChars <= 1)
+		{
+			Application.LoadLevel("Win Screen");
+			return;
+		}
+		SwitchChar();
+		Destroy(Char.gameObject);
+		numChars--;
+	}
+}
