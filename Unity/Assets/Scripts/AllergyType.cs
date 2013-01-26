@@ -1,18 +1,15 @@
 using System;
 
-namespace AssemblyCSharp
+public enum AllergyType
 {
-	public enum AllergyType
-	{
-		Bee,
-		Shellfish,
-		Pets,
-		Peanuts,
-		Onion,
-		Wheat,
-		Medicine,
-		Flowers,
-		Dust
-	}
+	Bee,
+	Shellfish,
+	Pets,
+	Peanuts,
+	Onion,
+	Wheat,
+	Medicine,
+	Flowers,
+	Dust
 }
 
