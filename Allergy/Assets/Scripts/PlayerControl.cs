@@ -62,6 +62,7 @@ public class PlayerControl : MonoBehaviour
 		if(numChars <= 1)
 		{
 			Application.LoadLevel("Win Screen");
+			return;
 		}
 		SwitchChar();
 		Destroy(Char.gameObject);
