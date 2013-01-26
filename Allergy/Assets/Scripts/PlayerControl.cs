@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
 	public Character[] character;
 	int currentChar = 0;
 	int numChars;
+	public int Speed;
 	void Start()
 	{
 		numChars = character.Length;
@@ -19,23 +20,23 @@ public class PlayerControl : MonoBehaviour
 			Transform past = curChar.transform;
 			if(Input.GetKey(KeyCode.UpArrow))
 			{
-				curChar.controller.Move(Vector3.up);
-				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(-90,0,0)), 1.0f);
+				curChar.controller.Move(Vector3.forward * Speed);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,0,0)), 1.0f);
 			}
 			if(Input.GetKey(KeyCode.DownArrow))
 			{
-				curChar.controller.Move(Vector3.down);
-				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(90,180,0)), 1.0f);
+				curChar.controller.Move(Vector3.back * Speed);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,180,0)), 1.0f);
 			}
 			if(Input.GetKey(KeyCode.LeftArrow))
 			{
-				curChar.controller.Move(Vector3.left);
-				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,-90,90)), 1.0f);
+				curChar.controller.Move(Vector3.left * Speed);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,-90,0)), 1.0f);
 			}
 			if(Input.GetKey(KeyCode.RightArrow))
 			{
-				curChar.controller.Move(Vector3.right);
-				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,90,-90)), 1.0f);
+				curChar.controller.Move(Vector3.right * Speed);
+				curChar.transform.rotation = Quaternion.Slerp(past.rotation , Quaternion.Euler(new Vector3(0,90,0)), 1.0f);
 			}
 			if(Input.GetKeyDown(KeyCode.Space))
 			{

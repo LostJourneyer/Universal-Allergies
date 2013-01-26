@@ -17,6 +17,10 @@ public class Character : MonoBehaviour
 			Allergies.Add((int)Allergy[i], AllergyStrength[i]);
 		controller = (CharacterController)GetComponent<CharacterController>();
 	}
+	void Update()
+	{
+		transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+	}
 	public void Attack()
 	{
 		Vector3 attack = transform.position + transform.forward;
@@ -44,6 +48,7 @@ public class Character : MonoBehaviour
 			if(Allergies.ContainsKey((int)Foe.EnemyType))
 			{
 				Vector3 push = transform.position - other.collider.transform.position;
+				push *= 3;
 				transform.position += push;
 				HitPoints -= Allergies[(int)Foe.EnemyType];
 				if(HitPoints <= 0)
