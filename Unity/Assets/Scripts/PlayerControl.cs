@@ -23,9 +23,8 @@ public class PlayerControl : MonoBehaviour
 				currentChar++;
 				if(currentChar >= character.Length)
 					currentChar=0;
-				cam.NextCharacter(character[currentChar]);
 			}
 		}
-		cam.transform.position = new Vector3(character[currentChar].transform.position.x, character[currentChar].transform.position.y, -10.0f);
+		cam.setCamera(character[currentChar]);
 	}
 }

@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-enum AllergyType
+public class Enemy : MonoBehaviour
 {
-	BEES,
-	FLOWER,
-};
+}
