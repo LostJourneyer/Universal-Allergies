@@ -20,4 +20,7 @@ public class Mass : MonoBehaviour {
 		Vector3 force=GravityManager.ApplyGravity(this);
 		m_body.AddForce(force*Time.fixedDeltaTime);
 	}
+	public void OnCollisionEnter(Collision other){
+		//Debug.LogError("pause");
+	}
 }

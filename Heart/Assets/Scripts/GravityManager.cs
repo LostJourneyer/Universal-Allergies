@@ -25,9 +25,11 @@ public class GravityManager
 		foreach (Mass m in m_Gravity.m_masses) {
 			if (body != m) {
 				Vector3 toVec = m.transform.position - body.transform.position;
-				totalForces = Mathf.Sqrt(toVec.sqrMagnitude*(body.m_size+m.m_size))*toVec.normalized;
+				totalForces =totalForces+ Mathf.Sqrt(toVec.sqrMagnitude*(body.m_size+m.m_size))*toVec.normalized;
+//				Debug.Log(m.name);
 			}
 		}
+//		Debug.Log(body.name+totalForces);
 		return totalForces;
 	}
 
