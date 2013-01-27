@@ -76,18 +76,31 @@ public class HighScores : MonoBehaviour {
 	void DisplayScores()
 	{
 		int top_offset = 20; // space on top for text box
-		int titlezone = 20; // vertical space for title of table
-		int boundary = 5; // space around table
+		int titlezone = 40; // vertical space for title of table
+		int boundary = 18; // space around table
 		int titlex = boundary; // x offset for title
 		int titley = top_offset; // y offset for title
-		int boxwidth = (int)(camera.pixelWidth/2 - boundary); // width of one table cell
-		int boxheight = (int)((camera.pixelHeight - top_offset - titlezone - 2*boundary) / 10); // height of one table cell
+		int nameboxwidth = (int)(camera.pixelWidth*0.75 - boundary); // width of one table cell
+		int nameboxheight = (int)((camera.pixelHeight - top_offset - titlezone - 2*boundary) / 10); // height of one table cell
+		int scoreboxwidth = (int)(camera.pixelWidth/4 - boundary); // width of one table cell
+		int scoreboxheight = (int)((camera.pixelHeight - top_offset - titlezone - 2*boundary) / 10); // height of one table cell
+
 		int nameoriginoffsetx = boundary; // x offset of first name cell
 		int nameoriginoffsety = top_offset + titlezone + boundary; // y offset of first name cell
-		int scoreoriginoffsetx = boundary+boxwidth; // x offset of first score cell
+		int scoreoriginoffsetx = boundary+nameboxwidth; // x offset of first score cell
 		int scoreoriginoffsety = top_offset + titlezone + boundary; // y offset of first score cell
 
-		GUI.Label (new Rect(titlex, titley, camera.pixelWidth - 2*boundary, titlezone), "High Scores");
+				GUI.backgroundColor = Color.yellow;
+
+		
+		GUI.skin.font = scoreFont;
+		GUI.skin.label.fontSize = 36;
+		var centeredStyle = GUI.skin.GetStyle("Label");
+    	centeredStyle.alignment = TextAnchor.UpperCenter;
+//		GUI.Label (new Rect(titlex, titley, camera.pixelWidth - 2*boundary, titlezone), "High Scores");
+
+		
+		GUI.skin.label.fontSize = 18;
 		for(int h = 0; h < 10; h++)
 		{
 //			string text = (PlayerPrefs.GetString("u_playerName"+h)+" "+ PlayerPrefs.GetInt("u_playerScore"+h)+"\n");
@@ -96,9 +109,14 @@ public class HighScores : MonoBehaviour {
 			
 			string nametext = PlayerPrefs.GetString("u_playerName"+h);
 			string scoretext = (""+PlayerPrefs.GetInt("u_playerScore"+h));
+
+			var leftStyle = GUI.skin.GetStyle ("Label");
+			leftStyle.alignment = TextAnchor.LowerLeft;
+			GUI.Label (new Rect(nameoriginoffsetx, nameoriginoffsety + h*nameboxheight, nameboxwidth, nameboxheight), nametext);
 			
-			GUI.Label (new Rect(nameoriginoffsetx, nameoriginoffsety + h*boxheight, boxwidth, boxheight), nametext);
-			GUI.Label (new Rect(scoreoriginoffsetx, scoreoriginoffsety + h*boxheight, boxwidth, boxheight), scoretext);
+			var rightStyle = GUI.skin.GetStyle ("Label");
+			rightStyle.alignment = TextAnchor.LowerRight;
+			GUI.Label (new Rect(scoreoriginoffsetx, scoreoriginoffsety + h*scoreboxheight, scoreboxwidth, scoreboxheight), scoretext);
 		}
 	}
 
