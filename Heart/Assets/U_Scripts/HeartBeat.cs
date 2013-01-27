@@ -3,6 +3,8 @@ using System.Collections;
 
 public class HeartBeat : MonoBehaviour {
 	public GameObject[] Planets;
+	public GameObject m_shieldGO;
+	public Shield m_shieldCon;
 	public Light m_light;
 	public float m_lightScale;
 	public float m_particalMultiplyer=10;
@@ -75,13 +77,15 @@ public class HeartBeat : MonoBehaviour {
 			m_up=true;
 			m_caught=false;
 		}
-
 		sm_score=sm_score+(int)(Time.deltaTime*100);
 		m_ScoreDisplay.text=""+sm_score;
 	}
 	public void OnCollisionEnter(Collision other){
-		HighScores.SetHighScore(sm_score);
-		Application.LoadLevel("HighScores");
+		if(other.gameObject.tag=="Mass"){
+			Debug.Log(m_shieldGO.activeSelf);
+			HighScores.SetHighScore(sm_score);
+			Application.LoadLevel("HighScores");
+		}
 	}
 	
 	private void balance(){
@@ -94,6 +98,11 @@ public class HeartBeat : MonoBehaviour {
 		if(m_curHits>m_hitsToSpawn){
 			spawnPlanet();
 			GravityManager.PowerPlanets();
+		}
+		if(sm_planetBonus>1)
+		{
+			m_hb.m_shieldGO.SetActive(true);
+			m_hb.m_shieldCon.PowerOn(sm_planetBonus);
 		}
 	}
 	public static void spawnPlanet(){
@@ -121,5 +130,6 @@ public class HeartBeat : MonoBehaviour {
 				r.velocity=r.velocity*damage;
 			}
 		}
+		sm_planetBonus=1;
 	}
 }
