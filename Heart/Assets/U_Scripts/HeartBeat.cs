@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class HeartBeat : MonoBehaviour {
+	public GameObject[] Planets;
+	public Light m_light;
+	public float m_lightScale;
 	public float m_particalMultiplyer=10;
 	public float m_colorMultiplyer;
 	public float m_tolerance;
@@ -11,17 +14,22 @@ public class HeartBeat : MonoBehaviour {
 	public int m_baseMax=1000;
 	public int m_absMax=1000000;
 	public int m_maxRate=1000;
+	public int m_hitsToSpawn=3;
+	public static int sm_planetBonus;
 	
+	private static HeartBeat m_hb;
 	private float m_max=0.06877659f;		//max spectrum value
 	private AudioSource m_AS;
 	private ParticleSystem m_PS;
 	private int m_score=0;
 	private int m_curMax;
 	private int m_curRate;
+	private int m_curHits=0;
 	private Mass m_mass;
 	
 	public void Start()
 	{	
+		m_hb=this;
 		m_AS=(AudioSource)gameObject.GetComponent<AudioSource>();
 		m_PS=(ParticleSystem)gameObject.GetComponent<ParticleSystem>();
 		m_mass=(Mass)gameObject.GetComponent<Mass>();
@@ -32,6 +40,7 @@ public class HeartBeat : MonoBehaviour {
 	{
         float[] spectrum = m_AS.GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
 		float normalizedSpect=Mathf.Min(1f, spectrum[0]/m_max);
+		m_light.range=10+(m_lightScale*normalizedSpect);
         m_PS.startSpeed =(normalizedSpect)*m_particalMultiplyer;
 		particleSystem.startColor=new Color(Mathf.Max(normalizedSpect,.9f),Mathf.Max(spectrum[1]/m_max,.7f),spectrum[2]/m_max,1f);
 		if(Input.GetKeyDown(KeyCode.Space)){
@@ -43,31 +52,42 @@ public class HeartBeat : MonoBehaviour {
 		}
 		m_ScoreDisplay.text="Score:"+m_score;
 	}
+	public void OnCollisionEnter(Collision other){
+		HighScores.SetHighScore(m_score);
+		Application.LoadLevel("HighScores");
+	}
+	
 	private void balance()
 	{
 		m_score++;
-		float r=Random.Range(5, 10);
-//		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
-//			m_curMax=m_curMax*10;
-//			m_curRate=m_curRate*10;
-//		}else{
-			Vector3 newLoc=new Vector3(r,0f,0f);
-			GameObject newMass=(GameObject)Instantiate(m_newMass,newLoc,Quaternion.identity);
-			Mass m=newMass.GetComponent<Mass>();
-			m.rigidbody.mass=r;
-			m_curMax=m_baseMax;
-			m_curRate=m_baseEmissionRate;
-			m.rigidbody.velocity=Mathf.Sqrt(m_mass.rigidbody.mass/(r*r*r*r))*new Vector3(0f,-1f,0f);
+		m_curHits++;
+		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
+			m_curMax=m_curMax*10;
+			m_curRate=m_curRate*10;
+		}
+		if(m_curHits>m_hitsToSpawn){
+			spawnPlanet();
 //			Debug.Log(m.m_vel);
-//		}
+		}
+	}
+	public static void spawnPlanet()
+	{
+		m_hb.m_curHits=0;
+		m_hb.m_score=10*sm_planetBonus;
+		sm_planetBonus=Mathf.Min(sm_planetBonus+1, 10);
+		float r=Random.Range(5, 10);
+		Vector3 newLoc=new Vector3(r,0f,0f);
+		GameObject newMass=(GameObject)Instantiate(m_hb.Planets[Random.Range(0,5)],newLoc,Quaternion.identity);
+		Mass m=newMass.GetComponent<Mass>();
+		m.rigidbody.mass=r;
+		m_hb.m_curMax=m_hb.m_baseMax;
+		m_hb.m_curRate=m_hb.m_baseEmissionRate;
+		m.rigidbody.velocity=Mathf.Sqrt(m_hb.m_mass.rigidbody.mass/(r*r*r*r))*new Vector3(0f,-1f,0f);
 	}
 	private void unbalance(){
 		Debug.Log("fall");
 		Rigidbody r=GravityManager.GetRandomMass().rigidbody;
 		r.velocity=r.velocity*.9f;
 	}
-	public void OnCollisionEnter(Collision other){
-		HighScores.SetHighScore(m_score);
-		Application.LoadLevel("HighScores");
-	}
+	
 }
