@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
 	}
 	void Update()
 	{
-		transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+		transform.position = new Vector3(transform.position.x, -1.0f, transform.position.z);
 	}
 	public void Attack()
 	{
