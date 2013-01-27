@@ -46,4 +46,9 @@ public class GravityManager
 		int numMasses=m_Gravity.m_planets.Count-1;
 		return m_Gravity.m_planets[Random.Range(0, numMasses)];
 	}
+	public static void PowerPlanets(){
+		foreach(Mass m in m_Gravity.m_planets){
+			m.rigidbody.velocity=m.rigidbody.velocity*1.1f;
+		}
+	}
 }

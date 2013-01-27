@@ -5,7 +5,8 @@ public class PaceMaker : MonoBehaviour {
 	public AudioClip[] m_HeartBeats;
 	// Use this for initialization
 	void Start () {
-		audio.PlayOneShot(m_HeartBeats[0]);
+		audio.clip=m_HeartBeats[0];
+		audio.Play();
 	}
 	
 	// Update is called once per frame

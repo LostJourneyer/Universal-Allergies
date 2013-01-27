@@ -17,6 +17,8 @@ public class HeartBeat : MonoBehaviour {
 	public int m_hitsToSpawn=3;
 	public static int sm_planetBonus;
 	public static int sm_score;
+	public MultiplierScript m_multipler;
+	public GameObject m_multiplierObj;
 	
 	private static HeartBeat m_hb;
 	private float m_max=0.06877659f;		//max spectrum value
@@ -59,6 +61,7 @@ public class HeartBeat : MonoBehaviour {
 		}else if(m_up){
 			if(normalizedSpect<m_tolerance){
 				if(!m_caught){
+					Debug.Log("damage");
 					unbalance(.6f);
 				}
 				m_up=false;
@@ -73,7 +76,7 @@ public class HeartBeat : MonoBehaviour {
 	}
 	public void OnCollisionEnter(Collision other){
 		HighScores.SetHighScore(sm_score);
-		Application.LoadLevel("Opening");//"HighScores");
+		Application.LoadLevel("HighScores");
 	}
 	
 	private void balance()
@@ -86,6 +89,8 @@ public class HeartBeat : MonoBehaviour {
 		}
 		if(m_curHits>m_hitsToSpawn){
 			spawnPlanet();
+			GravityManager.PowerPlanets();
+
 //			Debug.Log(m.m_vel);
 		}
 	}
@@ -94,6 +99,10 @@ public class HeartBeat : MonoBehaviour {
 		m_hb.m_curHits=0;
 		sm_score=sm_score+10*sm_planetBonus;
 		sm_planetBonus=Mathf.Min(sm_planetBonus+1, 10);
+		if(sm_planetBonus>1){
+			m_hb.m_multiplierObj.SetActive(true);
+			m_hb.m_multipler.Show(sm_planetBonus-1);
+		}
 		float r=Random.Range(5, 10);
 		Vector3 newLoc=new Vector3(r,0f,0f);
 		GameObject newMass=(GameObject)Instantiate(m_hb.Planets[Random.Range(0,5)],newLoc,Quaternion.identity);
