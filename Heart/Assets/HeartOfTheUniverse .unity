@@ -252,6 +252,7 @@ GameObject:
   - 114: {fileID: 778732164}
   - 114: {fileID: 778732165}
   - 54: {fileID: 778732166}
+  - 135: {fileID: 778732167}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -1440,8 +1441,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3806e20779779467cb9ab58be2ee021d, type: 3}
   m_Name: 
-  m_size: 100000
-  m_vel: {x: 0, y: 0, z: 0}
+  merger: 1
 --- !u!54 &778732166
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1457,6 +1457,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &778732167
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 778732159}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: .500000119}
 --- !u!1 &1298654414
 GameObject:
   m_ObjectHideFlags: 0

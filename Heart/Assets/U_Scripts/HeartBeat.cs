@@ -12,7 +12,6 @@ public class HeartBeat : MonoBehaviour {
 	public int m_absMax=1000000;
 	public int m_maxRate=1000;
 	
-	
 	private float m_max=0.06877659f;		//max spectrum value
 	private AudioSource m_AS;
 	private ParticleSystem m_PS;
@@ -48,10 +47,10 @@ public class HeartBeat : MonoBehaviour {
 	{
 		m_score++;
 		float r=Random.Range(5, 10);
-		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
-			m_curMax=m_curMax*10;
-			m_curRate=m_curRate*10;
-		}else{
+//		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
+//			m_curMax=m_curMax*10;
+//			m_curRate=m_curRate*10;
+//		}else{
 			Vector3 newLoc=new Vector3(r,0f,0f);
 			GameObject newMass=(GameObject)Instantiate(m_newMass,newLoc,Quaternion.identity);
 			Mass m=newMass.GetComponent<Mass>();
@@ -60,7 +59,7 @@ public class HeartBeat : MonoBehaviour {
 			m_curRate=m_baseEmissionRate;
 			m.rigidbody.velocity=Mathf.Sqrt(m_mass.rigidbody.mass/(r*r*r*r))*new Vector3(0f,-1f,0f);
 //			Debug.Log(m.m_vel);
-		}
+//		}
 	}
 	private void unbalance(){
 		Debug.Log("fall");

@@ -4,6 +4,7 @@ using System.Collections;
 public class Mass : MonoBehaviour {
 
 	private Rigidbody m_body;
+	public bool merger=true;
 	
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,21 @@ public class Mass : MonoBehaviour {
 		m_body.AddForce(force*Time.fixedDeltaTime);
 	}
 	public void OnCollisionEnter(Collision other){
-		//Debug.LogError("pause");
+		if(other.gameObject.tag=="Mass"){
+			Mass m=(Mass)other.gameObject.GetComponent<Mass>();
+			if(m.merger){
+				merger=false;
+			}else{
+				transform.localScale=transform.localScale*1.2f;
+				rigidbody.velocity=rigidbody.velocity+m.rigidbody.velocity;
+				rigidbody.mass=rigidbody.mass+m.rigidbody.mass;
+				Camera.mainCamera.transform.Translate(0f,0f,-1f);
+				Destroy(other.gameObject);
+			}
+		}
+	}
+	public void OnDestroy()
+	{
+		GravityManager.removeMass(this);
 	}
 }
