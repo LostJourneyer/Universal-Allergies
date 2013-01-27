@@ -19,7 +19,7 @@ public class HeartBeat : MonoBehaviour {
 	public static int sm_score;
 	public MultiplierScript m_multipler;
 	public GameObject m_multiplierObj;
-	public float m_ForceSpawn=3f;
+	public float m_ForceSpawn=5f;
 	
 	private static HeartBeat m_hb;
 	private float m_max=0.06877659f;		//max spectrum value
@@ -67,7 +67,7 @@ public class HeartBeat : MonoBehaviour {
 			if(normalizedSpect<m_tolerance){
 				if(!m_caught){
 					Debug.Log("damage");
-					unbalance(.6f);
+					unbalance(.9f);
 				}
 				m_up=false;
 			}
