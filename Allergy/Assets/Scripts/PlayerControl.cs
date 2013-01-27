@@ -66,7 +66,7 @@ public class PlayerControl : MonoBehaviour
 			return;
 		}
 		SwitchChar();
-		Destroy(Char.gameObject);
+		Destroy(Char.gameObject, 1);
 		numChars--;
 	}
 }
