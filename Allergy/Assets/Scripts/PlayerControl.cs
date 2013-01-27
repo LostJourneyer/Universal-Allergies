@@ -62,11 +62,12 @@ public class PlayerControl : MonoBehaviour
 				currentChar=0;
 		}
 	}
+	public string NextLevel;
 	public void KillMe(Character Char)
 	{
 		if(numChars <= 1)
 		{
-			Application.LoadLevel("Win Screen");
+			Application.LoadLevel(NextLevel);
 			return;
 		}
 		SwitchChar();
