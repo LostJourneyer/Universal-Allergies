@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
 	void Start()
 	{
 		Random.seed = (int)Time.time;
-		agent.destination = waypoints[0];
+		if(waypoints.Length >0)
+			agent.destination = waypoints[0];
 		animation.clip.wrapMode = WrapMode.Loop;
 		animation.Play();
 	}
@@ -26,11 +27,8 @@ public class Enemy : MonoBehaviour
 					current = 0;
 				agent.destination = waypoints[current];
 			}
-			else
-			{
-				agent.destination = (transform.position + transform.forward)*10;
-				agent.destination += Vector3.Normalize(new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)))*30;
-			}
 		}
+		if(wander)
+			agent.destination += (new Vector3(Random.value - 0.5f, 0, Random.value - 0.5f))*25;
 	}
 }
