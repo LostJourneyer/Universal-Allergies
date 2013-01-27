@@ -25,7 +25,7 @@ public class GravityManager
 		foreach (Mass m in m_Gravity.m_masses) {
 			if (body != m) {
 				Vector3 toVec = m.transform.position - body.transform.position;
-				totalForces =totalForces+ Mathf.Sqrt(toVec.sqrMagnitude*(body.m_size+m.m_size))*toVec.normalized;
+				totalForces =totalForces+ Mathf.Sqrt(toVec.sqrMagnitude*(body.rigidbody.mass+m.rigidbody.mass))*toVec.normalized;
 //				Debug.Log(m.name);
 			}
 		}
@@ -39,5 +39,9 @@ public class GravityManager
 
 	public static void Clear (){
 		m_Gravity.m_masses = new List<Mass> ();
+	}
+	public static Mass GetRandomMass(){
+		int numMasses=m_Gravity.m_masses.Count-1;
+		return m_Gravity.m_masses[Random.Range(0, numMasses)];
 	}
 }

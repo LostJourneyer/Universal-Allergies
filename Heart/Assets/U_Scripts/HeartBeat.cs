@@ -55,16 +55,17 @@ public class HeartBeat : MonoBehaviour {
 			Vector3 newLoc=new Vector3(r,0f,0f);
 			GameObject newMass=(GameObject)Instantiate(m_newMass,newLoc,Quaternion.identity);
 			Mass m=newMass.GetComponent<Mass>();
-			m.m_size=r;
+			m.rigidbody.mass=r;
 			m_curMax=m_baseMax;
 			m_curRate=m_baseEmissionRate;
-			m.m_vel=new Vector3();
-			m.m_vel=Mathf.Sqrt(m_mass.m_size/(r*r*r*r))*new Vector3(0f,-1f,0f);
-//			m.m_vel=(Mathf.Sqrt(m_mass.m_size*m.m_size)/r)*new Vector3(0f,1f,0f);
-			Debug.Log(m.m_vel);
+			m.rigidbody.velocity=Mathf.Sqrt(m_mass.rigidbody.mass/(r*r*r*r))*new Vector3(0f,-1f,0f);
+//			Debug.Log(m.m_vel);
 		}
 	}
 	private void unbalance(){
+		Debug.Log("fall");
+		Rigidbody r=GravityManager.GetRandomMass().rigidbody;
+		r.velocity=r.velocity*.9f;
 	}
 	public void OnCollisionEnter(Collision other){
 		HighScores.SetHighScore(m_score);
