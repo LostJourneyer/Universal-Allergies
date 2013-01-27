@@ -1,6 +1,6 @@
-﻿<Properties>
+<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/U_Scripts/HeartBeat.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../Allergy/Assets/Scripts/PlayerControl.cs">
     <Files>
       <File FileName="Assets/U_Scripts/HeartBeat.cs" Line="6" Column="23" />
       <File FileName="Assets/U_Scripts/GravityManager.cs" Line="50" Column="1" />
@@ -11,7 +11,9 @@
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/jonathanhirschberg/Global-Game-Jam-2013/Universal-Allergies/Heart/Assets/U_Scripts/HighScores.cs" line="47" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
