@@ -79,8 +79,7 @@ public class HeartBeat : MonoBehaviour {
 		Application.LoadLevel("HighScores");
 	}
 	
-	private void balance()
-	{
+	private void balance(){
 		sm_score++;
 		m_curHits++;
 		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
@@ -90,18 +89,15 @@ public class HeartBeat : MonoBehaviour {
 		if(m_curHits>m_hitsToSpawn){
 			spawnPlanet();
 			GravityManager.PowerPlanets();
-
-//			Debug.Log(m.m_vel);
 		}
 	}
-	public static void spawnPlanet()
-	{
+	public static void spawnPlanet(){
 		m_hb.m_curHits=0;
 		sm_score=sm_score+10*sm_planetBonus;
 		sm_planetBonus=Mathf.Min(sm_planetBonus+1, 10);
 		if(sm_planetBonus>1){
 			m_hb.m_multiplierObj.SetActive(true);
-			m_hb.m_multipler.Show(sm_planetBonus-1);
+			m_hb.m_multipler.Show(sm_planetBonus-2);
 		}
 		float r=Random.Range(5, 10);
 		Vector3 newLoc=new Vector3(r,0f,0f);

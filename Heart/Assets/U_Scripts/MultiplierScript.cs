@@ -15,7 +15,7 @@ public class MultiplierScript : MonoBehaviour {
 		}
 	}
 	public void Show(int multi){
-		gameObject.renderer.material.mainTexture=m_multipliers[m_amount];
+		gameObject.renderer.material.mainTexture=m_multipliers[multi];
 		m_life=3;
 	}
 }
