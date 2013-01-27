@@ -7,6 +7,7 @@ public class HighScores : MonoBehaviour {
 	public Texture buttonTexture;
 	public Font scoreFont;
 	private string playerName="";
+	private TapLevelLoader tll;
 
 
 	// Use this for initialization
@@ -19,7 +20,6 @@ public class HighScores : MonoBehaviour {
 	}
 	void OnGUI()
 	{
-		TapLevelLoader tll;
 		if(sm_updateScoreNames)
 		{
 			// Make a text field that modifies stringToEdit.
@@ -29,12 +29,16 @@ public class HighScores : MonoBehaviour {
 	        {
 				PlayerPrefs.SetString("u_playerName"+sm_place, playerName);
 				sm_updateScoreNames=false;
-				tll=(TapLevelLoader)gameObject.AddComponent<TapLevelLoader>();
-				tll.m_SceneToLoad="Opening";
+				if(tll==null){
+					tll=(TapLevelLoader)gameObject.AddComponent<TapLevelLoader>();
+					tll.m_SceneToLoad="Opening";
+				}
 	        }
 		}else{
-			tll=(TapLevelLoader)gameObject.AddComponent<TapLevelLoader>();
-			tll.m_SceneToLoad="Opening";
+			if(tll==null){
+				tll=(TapLevelLoader)gameObject.AddComponent<TapLevelLoader>();
+				tll.m_SceneToLoad="Opening";
+			}
 	}
 		DisplayScores();
 	}
@@ -43,7 +47,7 @@ public class HighScores : MonoBehaviour {
 	{
 		int top_offset = 20; // space on top for text box
 		int titlezone = 40; // vertical space for title of table
-		int boundary = 18; // space around table
+		int boundary = 30; // space around table
 		int titlex = boundary; // x offset for title
 		int titley = top_offset; // y offset for title
 		int nameboxwidth = (int)(camera.pixelWidth*0.75 - boundary); // width of one table cell
@@ -65,7 +69,7 @@ public class HighScores : MonoBehaviour {
     	centeredStyle.alignment = TextAnchor.UpperCenter;
 //		GUI.Label (new Rect(titlex, titley, camera.pixelWidth - 2*boundary, titlezone), "High Scores");
 
-		
+		SetHighScore(0);
 		GUI.skin.label.fontSize = 18;
 		for(int h = 0; h < 10; h++)
 		{
@@ -89,8 +93,8 @@ public class HighScores : MonoBehaviour {
 	{
 		if(!PlayerPrefs.HasKey("u_playerScore"+0)){
 			for(int i=0; i<10; i++){
-				PlayerPrefs.SetString("u_playerName"+i, "God");
-				PlayerPrefs.SetInt("u_playerScore"+i, 0);
+				PlayerPrefs.SetString("u_playerName"+i, "Xavier");
+				PlayerPrefs.SetInt("u_playerScore"+i, 600);
 			}
 		}
 		
