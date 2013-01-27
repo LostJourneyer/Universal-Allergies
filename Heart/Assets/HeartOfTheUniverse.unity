@@ -209,7 +209,11 @@ Prefab:
     - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_multipler
       value: 
-      objectReference: {fileID: 100000, guid: 8ce50af545a144c84a8cd0a99312bb4d, type: 2}
+      objectReference: {fileID: 811512762}
+    - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_multiplierObj
+      value: 
+      objectReference: {fileID: 811512761}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
   m_RootGameObject: {fileID: 778732159}
@@ -1419,7 +1423,8 @@ MonoBehaviour:
   m_absMax: 10000000
   m_maxRate: 1000
   m_hitsToSpawn: 0
-  m_multipler: {fileID: 100000, guid: 8ce50af545a144c84a8cd0a99312bb4d, type: 2}
+  m_multipler: {fileID: 811512762}
+  m_multiplierObj: {fileID: 811512761}
 --- !u!114 &778732165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,7 +1574,7 @@ Transform:
   m_PrefabInternal: {fileID: 1593533700}
   m_GameObject: {fileID: 811512761}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 5.1901536, y: 3.98491955, z: 7.65818024}
+  m_LocalPosition: {x: 4.55999994, y: 3.98491955, z: 7.65818024}
   m_LocalScale: {x: -.217538238, y: 98937.9844, z: -.217538238}
   m_Children: []
   m_Father: {fileID: 67116524}
@@ -1602,7 +1607,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2a182636fcdc346f0a11920c5ae59e1a, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1615,7 +1620,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1298654414}
-  m_Text: 
+  m_Text: Score
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1625,7 +1630,7 @@ TextMesh:
   m_FontSize: 0
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 2a182636fcdc346f0a11920c5ae59e1a, type: 3}
 --- !u!4 &1298654417
 Transform:
   m_ObjectHideFlags: 0
@@ -1633,7 +1638,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1298654414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.42095423, y: 5.84711981, z: 10}
+  m_LocalPosition: {x: -6.94000006, y: 5.84711981, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 67116524}
@@ -1646,7 +1651,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 8ce50af545a144c84a8cd0a99312bb4d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5.1901536
+      value: 4.55999994
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8ce50af545a144c84a8cd0a99312bb4d, type: 2}
       propertyPath: m_LocalPosition.y

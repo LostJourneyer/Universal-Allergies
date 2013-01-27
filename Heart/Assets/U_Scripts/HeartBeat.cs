@@ -19,6 +19,7 @@ public class HeartBeat : MonoBehaviour {
 	public static int sm_score;
 	public MultiplierScript m_multipler;
 	public GameObject m_multiplierObj;
+	public float m_ForceSpawn=3f;
 	
 	private static HeartBeat m_hb;
 	private float m_max=0.06877659f;		//max spectrum value
@@ -42,7 +43,6 @@ public class HeartBeat : MonoBehaviour {
 		m_curRate=m_baseEmissionRate;
 		sm_planetBonus=0;
 		sm_score=0;
-		spawnPlanet();
 	}
 	public void Update()
 	{
@@ -50,7 +50,12 @@ public class HeartBeat : MonoBehaviour {
 		float normalizedSpect=Mathf.Min(1f, spectrum[0]/m_max);
 		m_light.range=10+(m_lightScale*normalizedSpect);
         m_PS.startSpeed =(normalizedSpect)*m_particalMultiplyer;
-		particleSystem.startColor=new Color(Mathf.Max(normalizedSpect,.9f),Mathf.Max(spectrum[1]/m_max,.7f),spectrum[2]/m_max,1f);			
+		particleSystem.startColor=new Color(Mathf.Max(normalizedSpect,.9f),Mathf.Max(spectrum[1]/m_max,.7f),spectrum[2]/m_max,1f);
+		if((m_ForceSpawn<0)&&(GravityManager.GM.m_planets.Count<1)){
+			spawnPlanet();
+		}else{
+			m_ForceSpawn=m_ForceSpawn-Time.deltaTime;
+		}
 		if(Input.GetKeyDown(KeyCode.Space)){
 			m_caught=true;
 			if(normalizedSpect>m_tolerance){
@@ -72,7 +77,7 @@ public class HeartBeat : MonoBehaviour {
 		}
 
 		sm_score=sm_score+(int)(Time.deltaTime*100);
-		m_ScoreDisplay.text="Score:"+sm_score;
+		m_ScoreDisplay.text=""+sm_score;
 	}
 	public void OnCollisionEnter(Collision other){
 		HighScores.SetHighScore(sm_score);
@@ -110,7 +115,11 @@ public class HeartBeat : MonoBehaviour {
 	}
 	private void unbalance(float damage){
 		Debug.Log("fall");
-		Rigidbody r=GravityManager.GetRandomPlanet().rigidbody;
-		r.velocity=r.velocity*damage;
+		if(GravityManager.GM.m_planets.Count>0){
+			if(GravityManager.GetRandomPlanet()!=null){
+				Rigidbody r=GravityManager.GetRandomPlanet().rigidbody;
+				r.velocity=r.velocity*damage;
+			}
+		}
 	}
 }
