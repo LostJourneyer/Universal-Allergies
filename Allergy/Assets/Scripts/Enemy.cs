@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 	void Start()
 	{
 		agent.destination = waypoints[0];
+		animation.clip.wrapMode = WrapMode.Loop;
+		animation.Play();
 	}
 	void Update()
 	{
