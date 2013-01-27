@@ -51,4 +51,11 @@ public class GravityManager
 			m.rigidbody.velocity=m.rigidbody.velocity*1.1f;
 		}
 	}
+	public static void antiGravitBurst(){
+		foreach(Mass m in m_Gravity.m_planets)
+		{
+			Vector3 gravity=ApplyGravity(m);
+			m.rigidbody.AddForce(gravity*(-1)*(m.rigidbody.mass));
+		}
+	}
 }

@@ -12,7 +12,7 @@ public class TapLevelLoader : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.anyKey||Input.GetMouseButtonDown(0)||Input.GetMouseButtonDown(1)){
+		if(Input.anyKey||Input.GetMouseButtonDown(0)||Input.GetMouseButtonDown(1)||Input.touches.Length>0){
 			Application.LoadLevel(m_SceneToLoad);
 		}
 	}

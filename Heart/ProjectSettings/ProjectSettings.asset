@@ -5,7 +5,7 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   AndroidProfiler: 0
-  defaultScreenOrientation: 0
+  defaultScreenOrientation: 2
   targetDevice: 2
   targetGlesGraphics: 1
   targetResolution: 0
@@ -64,7 +64,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.Company.ProductName
+  iPhoneBundleIdentifier: com.rerouteSFhack.heart
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 6
@@ -83,13 +83,17 @@ PlayerSettings:
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIStatusBarHidden: 1
-  uIExitOnSuspend: 0
+  uIExitOnSuspend: 1
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 0}
-  iPhoneHighResSplashScreen: {fileID: 0}
-  iPhoneTallHighResSplashScreen: {fileID: 0}
-  iPadPortraitSplashScreen: {fileID: 0}
-  iPadHighResPortraitSplashScreen: {fileID: 0}
+  iPhoneSplashScreen: {fileID: 2800000, guid: 49d0fecab304c4e9688f9dac917162c8, type: 3}
+  iPhoneHighResSplashScreen: {fileID: 2800000, guid: 49d0fecab304c4e9688f9dac917162c8,
+    type: 3}
+  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 49d0fecab304c4e9688f9dac917162c8,
+    type: 3}
+  iPadPortraitSplashScreen: {fileID: 2800000, guid: 49d0fecab304c4e9688f9dac917162c8,
+    type: 3}
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 49d0fecab304c4e9688f9dac917162c8,
+    type: 3}
   iPadLandscapeSplashScreen: {fileID: 0}
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
@@ -138,7 +142,10 @@ PlayerSettings:
   ps3SaveGameSlots: 1
   ps3TrialMode: 0
   flashStrippingLevel: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    data:
+      first: 4
+      second: 1
   metroPackageName: 
   metroPackageLogo: 
   metroPackageVersion: 

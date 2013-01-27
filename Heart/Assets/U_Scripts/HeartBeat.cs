@@ -58,7 +58,7 @@ public class HeartBeat : MonoBehaviour {
 		}else{
 			m_ForceSpawn=m_ForceSpawn-Time.deltaTime;
 		}
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(Input.GetKeyDown(KeyCode.Space)||(Input.touches.Length>0)){
 			m_caught=true;
 			if(normalizedSpect>m_tolerance){
 				balance();
@@ -99,10 +99,12 @@ public class HeartBeat : MonoBehaviour {
 			spawnPlanet();
 			GravityManager.PowerPlanets();
 		}
-		if(sm_planetBonus>1)
+		if(sm_planetBonus>5)
 		{
 			m_hb.m_shieldGO.SetActive(true);
 			m_hb.m_shieldCon.PowerOn(sm_planetBonus);
+		}else if(sm_planetBonus>2){
+			GravityManager.antiGravitBurst();
 		}
 	}
 	public static void spawnPlanet(){
