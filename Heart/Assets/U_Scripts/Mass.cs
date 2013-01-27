@@ -9,6 +9,9 @@ public class Mass : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GravityManager.GM.m_masses.Add(this);
+		if(gameObject.tag=="Mass"){
+			GravityManager.GM.m_planets.Add(this);
+		}
 		m_body=(Rigidbody)GetComponent<Rigidbody>();
 	}
 	
@@ -28,6 +31,7 @@ public class Mass : MonoBehaviour {
 				rigidbody.mass=rigidbody.mass+m.rigidbody.mass;
 				Camera.mainCamera.transform.Translate(0f,0f,-1f);
 				Destroy(other.gameObject);
+				HeartBeat.sm_score=HeartBeat.sm_score+100;
 			}
 		}
 	}

@@ -6,9 +6,11 @@ public class GravityManager
 {
 	public List<Mass> m_masses;
 	private static GravityManager m_Gravity;
+	public List<Mass> m_planets;
 	
 	private GravityManager (){
 		m_masses = new List<Mass> ();
+		m_planets = new List<Mass>();
 	}
 	
 	public static GravityManager GM {
@@ -35,13 +37,13 @@ public class GravityManager
 
 	public static void removeMass (Mass m){
 		m_Gravity.m_masses.Remove (m);
+		m_Gravity.m_planets.Remove(m);
 	}
-
 	public static void Clear (){
 		m_Gravity.m_masses = new List<Mass> ();
 	}
-	public static Mass GetRandomMass(){
-		int numMasses=m_Gravity.m_masses.Count-1;
-		return m_Gravity.m_masses[Random.Range(0, numMasses)];
+	public static Mass GetRandomPlanet(){
+		int numMasses=m_Gravity.m_planets.Count-1;
+		return m_Gravity.m_planets[Random.Range(0, numMasses)];
 	}
 }
