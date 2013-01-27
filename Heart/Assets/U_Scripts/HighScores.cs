@@ -47,7 +47,7 @@ public class HighScores : MonoBehaviour {
 	{
 		int top_offset = 20; // space on top for text box
 		int titlezone = 40; // vertical space for title of table
-		int boundary = 30; // space around table
+		int boundary = 50; // space around table
 		int titlex = boundary; // x offset for title
 		int titley = top_offset; // y offset for title
 		int nameboxwidth = (int)(camera.pixelWidth*0.75 - boundary); // width of one table cell
