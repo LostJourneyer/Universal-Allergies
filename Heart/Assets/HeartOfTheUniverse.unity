@@ -314,7 +314,7 @@ Prefab:
       objectReference: {fileID: 1298654416}
     - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_tolerance
-      value: 0
+      value: .0500000007
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_multipler
@@ -343,6 +343,14 @@ Prefab:
     - target: {fileID: 8200000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: Priority
       value: 255
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_touchFeedback
+      value: 
+      objectReference: {fileID: 100000, guid: de4bec8d0d8defb46af3a04f68ae7f6f, type: 2}
+    - target: {fileID: 5400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_Mass
+      value: 1e+07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
@@ -1612,7 +1620,7 @@ MonoBehaviour:
   m_lightScale: 10
   m_particalMultiplyer: 100
   m_colorMultiplyer: 200
-  m_tolerance: 0
+  m_tolerance: .0500000007
   m_ScoreDisplay: {fileID: 1298654416}
   m_newMass: {fileID: 100000, guid: 064f68675f0574be08e7f2839e2254ad, type: 2}
   m_baseEmissionRate: 10
@@ -1622,6 +1630,7 @@ MonoBehaviour:
   m_hitsToSpawn: 3
   m_multipler: {fileID: 811512762}
   m_multiplierObj: {fileID: 811512761}
+  m_touchFeedback: {fileID: 100000, guid: de4bec8d0d8defb46af3a04f68ae7f6f, type: 2}
   m_ForceSpawn: 5
 --- !u!114 &778732165
 MonoBehaviour:
@@ -1643,7 +1652,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 448118483}
   m_GameObject: {fileID: 778732159}
   serializedVersion: 2
-  m_Mass: 100000
+  m_Mass: 1e+07
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0
@@ -1771,7 +1780,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 8ce50af545a144c84a8cd0a99312bb4d, type: 2}
   m_PrefabInternal: {fileID: 1593533700}
   m_GameObject: {fileID: 811512761}
-  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
+  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 4.55999994, y: 3.98491955, z: 7.65818024}
   m_LocalScale: {x: -.217538238, y: 98937.9844, z: -.217538238}
   m_Children: []

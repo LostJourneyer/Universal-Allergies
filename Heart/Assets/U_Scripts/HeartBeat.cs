@@ -91,6 +91,10 @@ public class HeartBeat : MonoBehaviour {
 		}
 		sm_score=sm_score+(int)(Time.deltaTime*100);
 		m_ScoreDisplay.text=""+sm_score;
+		if(rigidbody.velocity.magnitude!=0){
+			rigidbody.velocity=new Vector3();
+			transform.position=new Vector3();
+		}
 	}
 	public void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag=="Mass"){
