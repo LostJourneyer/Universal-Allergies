@@ -21,8 +21,8 @@ public class HeartBeat : MonoBehaviour {
 	public static int sm_score;
 	public MultiplierScript m_multipler;
 	public GameObject m_multiplierObj;
-	public float m_ForceSpawn=5f;
-	public GameObject SolarWind;
+    public GameObject m_touchFeedback;
+	public float m_ForceSpawn=5f;           //used to time tutorial
 	
 	private static HeartBeat m_hb;
 	private float m_max=0.06877659f;		//max spectrum value
@@ -59,8 +59,19 @@ public class HeartBeat : MonoBehaviour {
 		}else{
 			m_ForceSpawn=m_ForceSpawn-Time.deltaTime;
 		}
-		if(Input.GetKeyDown(KeyCode.Space)||(Input.touches.Length>0)){
+		if((Input.touches.Length>0)||Input.GetMouseButtonDown(0)){
 			m_caught=true;
+            Ray ray;
+            if (Input.touches.Length > 0){
+                ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+            }else{
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            }
+            Vector3 DisplayLoc=ray.GetPoint(10f);
+            GameObject tDisplay=(GameObject)Instantiate(m_touchFeedback, DisplayLoc, Quaternion.identity);
+            touchSpot ts = (touchSpot)tDisplay.GetComponent<touchSpot>();
+            ts.m_score = normalizedSpect;
+
 			if(normalizedSpect>m_tolerance){
 				balance();
 			}else{
@@ -69,6 +80,7 @@ public class HeartBeat : MonoBehaviour {
 		}else if(m_up){
 			if(normalizedSpect<m_tolerance){
 				if(!m_caught){
+					Debug.Log("damage");
 					unbalance(.9f);
 				}
 				m_up=false;
@@ -104,8 +116,6 @@ public class HeartBeat : MonoBehaviour {
 			m_hb.m_shieldGO.SetActive(true);
 			m_hb.m_shieldCon.PowerOn(sm_planetBonus);
 		}else if(sm_planetBonus>2){
-			Debug.Log("sw");
-			Instantiate(SolarWind, transform.position, Quaternion.identity);
 			GravityManager.antiGravitBurst();
 		}
 	}
@@ -127,6 +137,7 @@ public class HeartBeat : MonoBehaviour {
 		m.rigidbody.velocity=Mathf.Sqrt(m_hb.m_mass.rigidbody.mass/(r*r*r*r))*new Vector3(0f,-1f,0f);
 	}
 	private void unbalance(float damage){
+		Debug.Log("fall");
 		if(GravityManager.GM.m_planets.Count>0){
 			if(GravityManager.GetRandomPlanet()!=null){
 				Rigidbody r=GravityManager.GetRandomPlanet().rigidbody;
