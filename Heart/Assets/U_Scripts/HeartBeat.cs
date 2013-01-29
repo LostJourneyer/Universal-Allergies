@@ -21,7 +21,8 @@ public class HeartBeat : MonoBehaviour {
 	public static int sm_score;
 	public MultiplierScript m_multipler;
 	public GameObject m_multiplierObj;
-	public float m_ForceSpawn=5f;
+    public GameObject m_touchFeedback;
+	public float m_ForceSpawn=5f;           //used to time tutorial
 	
 	private static HeartBeat m_hb;
 	private float m_max=0.06877659f;		//max spectrum value
@@ -58,8 +59,19 @@ public class HeartBeat : MonoBehaviour {
 		}else{
 			m_ForceSpawn=m_ForceSpawn-Time.deltaTime;
 		}
-		if(Input.GetKeyDown(KeyCode.Space)||(Input.touches.Length>0)){
+		if((Input.touches.Length>0)||Input.GetMouseButtonDown(0)){
 			m_caught=true;
+            Ray ray;
+            if (Input.touches.Length > 0){
+                ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+            }else{
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            }
+            Vector3 DisplayLoc=ray.GetPoint(10f);
+            GameObject tDisplay=(GameObject)Instantiate(m_touchFeedback, DisplayLoc, Quaternion.identity);
+            touchSpot ts = (touchSpot)tDisplay.GetComponent<touchSpot>();
+            ts.m_score = normalizedSpect;
+
 			if(normalizedSpect>m_tolerance){
 				balance();
 			}else{
