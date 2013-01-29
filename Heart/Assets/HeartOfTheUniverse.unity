@@ -336,6 +336,14 @@ Prefab:
       propertyPath: m_shieldCon
       value: 
       objectReference: {fileID: 893264198}
+    - target: {fileID: 8200000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: Priority
+      value: 255
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
   m_RootGameObject: {fileID: 778732159}
@@ -1538,7 +1546,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Priority: 128
+  Priority: 255
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

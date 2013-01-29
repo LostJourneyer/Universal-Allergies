@@ -8,10 +8,20 @@ public class HighScores : MonoBehaviour {
 	public Font scoreFont;
 	private string playerName="";
 	private TapLevelLoader tll;
-
+#if UNITY_IPHONE
+	TouchScreenKeyboard keyboard;
+#endif
 
 	// Use this for initialization
 	void Start () {
+		sm_place=PlayerPrefs.GetInt("Player");
+		if(PlayerPrefs.GetInt("Update")==1)
+			sm_updateScoreNames=true;
+		else
+			sm_updateScoreNames=false;
+#if UNITY_IPHONE
+		keyboard = TouchScreenKeyboard.Open(playerName,TouchScreenKeyboardType.Default);
+#endif
 	}
 
 	// Update is called once per frame
@@ -20,6 +30,7 @@ public class HighScores : MonoBehaviour {
 	}
 	void OnGUI()
 	{
+#if UNITY_EDITOR
 		if(sm_updateScoreNames)
 		{
 			// Make a text field that modifies stringToEdit.
@@ -41,6 +52,32 @@ public class HighScores : MonoBehaviour {
 			}
 	}
 		DisplayScores();
+#elif UNITY_IPHONE
+		if(sm_updateScoreNames)
+		{
+			if (keyboard.active){
+				playerName = keyboard.text;
+			}
+			if(keyboard.done)
+			{
+				PlayerPrefs.SetString("u_playerName"+sm_place, playerName);
+				sm_updateScoreNames=false;
+				if(tll==null){
+					tll=(TapLevelLoader)gameObject.AddComponent<TapLevelLoader>();
+					tll.m_SceneToLoad="Opening";
+				}
+				sm_updateScoreNames=false;
+	        }
+		}else{
+			if(tll==null){
+				tll=(TapLevelLoader)gameObject.AddComponent<TapLevelLoader>();
+				tll.m_SceneToLoad="Opening";
+			}
+		}
+		DisplayScores();
+		
+		
+#endif
 	}
 
 	void DisplayScores()
@@ -89,7 +126,8 @@ public class HighScores : MonoBehaviour {
 			GUI.Label (new Rect(scoreoriginoffsetx, scoreoriginoffsety + h*scoreboxheight, scoreboxwidth, scoreboxheight), scoretext);
 		}
 	}
-		public static void SetHighScore(int score)
+	
+	public static void SetHighScore(int score)
 	{
 		if(!PlayerPrefs.HasKey("u_playerScore"+0)){
 			for(int i=0; i<10; i++){
@@ -108,9 +146,12 @@ public class HighScores : MonoBehaviour {
 				sm_place=i;
 				Debug.Log("sm_place = "+sm_place);
 				sm_updateScoreNames= true;
+				PlayerPrefs.SetInt("Update", 1);
+				PlayerPrefs.SetInt("Player",i);
 				return;
 			}
 		}
+		PlayerPrefs.SetInt("Update", 0);
 		sm_updateScoreNames= false;
 	}
 }

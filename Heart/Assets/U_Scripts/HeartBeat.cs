@@ -22,6 +22,7 @@ public class HeartBeat : MonoBehaviour {
 	public MultiplierScript m_multipler;
 	public GameObject m_multiplierObj;
 	public float m_ForceSpawn=5f;
+	public GameObject SolarWind;
 	
 	private static HeartBeat m_hb;
 	private float m_max=0.06877659f;		//max spectrum value
@@ -68,7 +69,6 @@ public class HeartBeat : MonoBehaviour {
 		}else if(m_up){
 			if(normalizedSpect<m_tolerance){
 				if(!m_caught){
-					Debug.Log("damage");
 					unbalance(.9f);
 				}
 				m_up=false;
@@ -104,6 +104,8 @@ public class HeartBeat : MonoBehaviour {
 			m_hb.m_shieldGO.SetActive(true);
 			m_hb.m_shieldCon.PowerOn(sm_planetBonus);
 		}else if(sm_planetBonus>2){
+			Debug.Log("sw");
+			Instantiate(SolarWind, transform.position, Quaternion.identity);
 			GravityManager.antiGravitBurst();
 		}
 	}
@@ -125,7 +127,6 @@ public class HeartBeat : MonoBehaviour {
 		m.rigidbody.velocity=Mathf.Sqrt(m_hb.m_mass.rigidbody.mass/(r*r*r*r))*new Vector3(0f,-1f,0f);
 	}
 	private void unbalance(float damage){
-		Debug.Log("fall");
 		if(GravityManager.GM.m_planets.Count>0){
 			if(GravityManager.GetRandomPlanet()!=null){
 				Rigidbody r=GravityManager.GetRandomPlanet().rigidbody;
