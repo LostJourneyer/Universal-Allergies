@@ -19,6 +19,9 @@ public class Mass : MonoBehaviour {
 	void FixedUpdate () {
 		Vector3 force=GravityManager.ApplyGravity(this);
 		m_body.AddForce(force*Time.fixedDeltaTime);
+		if(transform.position.x>Mathf.Pow(10,7)&&transform.position.y>Mathf.Pow(10,7)){
+			Destroy(gameObject);
+		}
 	}
 	public void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag=="Mass"){

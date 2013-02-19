@@ -55,7 +55,7 @@ public class HeartBeat : MonoBehaviour {
         m_PS.startSpeed =(normalizedSpect)*m_particalMultiplyer;
 		particleSystem.startColor=new Color(Mathf.Max(normalizedSpect,.9f),Mathf.Max(spectrum[1]/m_max,.7f),spectrum[2]/m_max,1f);
 		if((m_ForceSpawn<0)&&(GravityManager.GM.m_planets.Count<1)){
-			spawnPlanet();
+			spawnPlanet(new Vector3(0,20,0));
 		}else{
 			m_ForceSpawn=m_ForceSpawn-Time.deltaTime;
 		}
@@ -71,9 +71,9 @@ public class HeartBeat : MonoBehaviour {
             GameObject tDisplay=(GameObject)Instantiate(m_touchFeedback, DisplayLoc, Quaternion.identity);
             touchSpot ts = (touchSpot)tDisplay.GetComponent<touchSpot>();
             ts.m_score = normalizedSpect;
-
+			
 			if(normalizedSpect>m_tolerance){
-				balance();
+				balance(ts.transform.position);
 			}else{
 				unbalance(.99f);
 			}
@@ -81,7 +81,7 @@ public class HeartBeat : MonoBehaviour {
 			if(normalizedSpect<m_tolerance){
 				if(!m_caught){
 					Debug.Log("damage");
-					unbalance(.9f);
+					unbalance(.8f);
 				}
 				m_up=false;
 			}
@@ -89,7 +89,7 @@ public class HeartBeat : MonoBehaviour {
 			m_up=true;
 			m_caught=false;
 		}
-		sm_score=sm_score+(int)(Time.deltaTime*100);
+//		sm_score=sm_score+(int)(Time.deltaTime);
 		m_ScoreDisplay.text=""+sm_score;
 		if(rigidbody.velocity.magnitude!=0){
 			rigidbody.velocity=new Vector3();
@@ -104,15 +104,16 @@ public class HeartBeat : MonoBehaviour {
 		}
 	}
 	
-	private void balance(){
+	private void balance(Vector3 spawnLoc){
 		sm_score++;
 		m_curHits++;
+		Debug.Log(m_curHits+","+m_hitsToSpawn);
 		if((m_curMax<m_absMax)||(m_curRate<m_maxRate)){
 			m_curMax=m_curMax*10;
 			m_curRate=m_curRate*10;
 		}
 		if(m_curHits>m_hitsToSpawn){
-			spawnPlanet();
+			spawnPlanet(spawnLoc);
 			GravityManager.PowerPlanets();
 		}
 		if(sm_planetBonus>5)
@@ -123,7 +124,7 @@ public class HeartBeat : MonoBehaviour {
 			GravityManager.antiGravitBurst();
 		}
 	}
-	public static void spawnPlanet(){
+	public static void spawnPlanet(Vector3 loc){
 		m_hb.m_curHits=0;
 		sm_score=sm_score+10*sm_planetBonus;
 		sm_planetBonus=Mathf.Min(sm_planetBonus+1, 10);
@@ -132,16 +133,14 @@ public class HeartBeat : MonoBehaviour {
 			m_hb.m_multipler.Show(sm_planetBonus-2);
 		}
 		float r=Random.Range(5, 10);
-		Vector3 newLoc=new Vector3(r,0f,0f);
-		GameObject newMass=(GameObject)Instantiate(m_hb.Planets[Random.Range(0,5)],newLoc,Quaternion.identity);
+		GameObject newMass=(GameObject)Instantiate(m_hb.Planets[Random.Range(0,5)],loc,Quaternion.identity);
 		Mass m=newMass.GetComponent<Mass>();
 		m.rigidbody.mass=r;
 		m_hb.m_curMax=m_hb.m_baseMax;
 		m_hb.m_curRate=m_hb.m_baseEmissionRate;
-		m.rigidbody.velocity=Mathf.Sqrt(m_hb.m_mass.rigidbody.mass/(r*r*r*r))*new Vector3(0f,-1f,0f);
+		m.rigidbody.velocity=Mathf.Sqrt(m_hb.m_mass.rigidbody.mass*m.rigidbody.mass*Mathf.PI/(r*r))*(new Vector3(loc.y, 0, loc.x*-1).normalized);
 	}
 	private void unbalance(float damage){
-		Debug.Log("fall");
 		if(GravityManager.GM.m_planets.Count>0){
 			if(GravityManager.GetRandomPlanet()!=null){
 				Rigidbody r=GravityManager.GetRandomPlanet().rigidbody;

@@ -272,6 +272,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -314,7 +318,7 @@ Prefab:
       objectReference: {fileID: 1298654416}
     - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_tolerance
-      value: .0500000007
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_multipler
@@ -326,7 +330,7 @@ Prefab:
       objectReference: {fileID: 811512761}
     - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_hitsToSpawn
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_shieldGO
@@ -350,8 +354,48 @@ Prefab:
       objectReference: {fileID: 100000, guid: de4bec8d0d8defb46af3a04f68ae7f6f, type: 2}
     - target: {fileID: 5400000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
       propertyPath: m_Mass
-      value: 1e+07
+      value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f3386e952ccb41fbb8508e0cbdf05b3, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3e2e9dd4054942479807a2952e6694d, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4338addf31b6a4f9d856fa5b923ae577, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 29c659ad051ec4adeb1edc7ec2d7dd85, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: dabe3a1a0376641dba75cc557beae1db, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 38b540ece31cd401ca806f93f6bbd925, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 29c659ad051ec4adeb1edc7ec2d7dd85, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c30bdf94725145ba897712dddf4486a, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 88698aa5285844a138300aa4da90359e, type: 3}
+    - target: {fileID: 11400004, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
+      propertyPath: m_HeartBeats.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: fd207fce268324e958e1004b6a95df76, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 115e2f090f3a341b7ab0160a5e585df4, type: 2}
   m_RootGameObject: {fileID: 778732159}
@@ -1620,14 +1664,14 @@ MonoBehaviour:
   m_lightScale: 10
   m_particalMultiplyer: 100
   m_colorMultiplyer: 200
-  m_tolerance: .0500000007
+  m_tolerance: .5
   m_ScoreDisplay: {fileID: 1298654416}
   m_newMass: {fileID: 100000, guid: 064f68675f0574be08e7f2839e2254ad, type: 2}
   m_baseEmissionRate: 10
   m_baseMax: 1000
   m_absMax: 10000000
   m_maxRate: 1000
-  m_hitsToSpawn: 3
+  m_hitsToSpawn: 1
   m_multipler: {fileID: 811512762}
   m_multiplierObj: {fileID: 811512761}
   m_touchFeedback: {fileID: 100000, guid: de4bec8d0d8defb46af3a04f68ae7f6f, type: 2}
@@ -1652,7 +1696,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 448118483}
   m_GameObject: {fileID: 778732159}
   serializedVersion: 2
-  m_Mass: 1e+07
+  m_Mass: 500
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0
@@ -1685,13 +1729,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2be56dbff634d26806ea5ad71ba448, type: 3}
   m_Name: 
   m_HeartBeats:
-  - {fileID: 8300000, guid: 4216a1e55a96b473b99705919e9a87ff, type: 3}
-  - {fileID: 8300000, guid: e9d181e9c8d284caa8550a894d0ececa, type: 3}
-  - {fileID: 8300000, guid: cd20d29f80c9f47eca37d5fc7d7800db, type: 3}
-  - {fileID: 8300000, guid: 3f8df85ea88654a75971408e84b3e94c, type: 3}
-  - {fileID: 8300000, guid: 29f2bb60ce20b465a88cabbecfc6b9fb, type: 3}
-  - {fileID: 8300000, guid: 29f2bb60ce20b465a88cabbecfc6b9fb, type: 3}
-  - {fileID: 8300000, guid: 73f09b26795634b13b0ce394372f2438, type: 3}
+  - {fileID: 8300000, guid: f3e2e9dd4054942479807a2952e6694d, type: 3}
+  - {fileID: 8300000, guid: 7f3386e952ccb41fbb8508e0cbdf05b3, type: 3}
+  - {fileID: 8300000, guid: 29c659ad051ec4adeb1edc7ec2d7dd85, type: 3}
+  - {fileID: 8300000, guid: 4338addf31b6a4f9d856fa5b923ae577, type: 3}
+  - {fileID: 8300000, guid: dabe3a1a0376641dba75cc557beae1db, type: 3}
+  - {fileID: 8300000, guid: 38b540ece31cd401ca806f93f6bbd925, type: 3}
+  - {fileID: 8300000, guid: 29c659ad051ec4adeb1edc7ec2d7dd85, type: 3}
+  - {fileID: 8300000, guid: 5c30bdf94725145ba897712dddf4486a, type: 3}
+  - {fileID: 8300000, guid: 88698aa5285844a138300aa4da90359e, type: 3}
+  - {fileID: 8300000, guid: fd207fce268324e958e1004b6a95df76, type: 3}
 --- !u!1 &811512761
 GameObject:
   m_ObjectHideFlags: 0

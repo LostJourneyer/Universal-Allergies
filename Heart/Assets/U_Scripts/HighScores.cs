@@ -30,7 +30,7 @@ public class HighScores : MonoBehaviour {
 	}
 	void OnGUI()
 	{
-#if UNITY_EDITOR
+#if !UNITY_IPHONE
 		if(sm_updateScoreNames)
 		{
 			// Make a text field that modifies stringToEdit.
@@ -52,7 +52,7 @@ public class HighScores : MonoBehaviour {
 			}
 	}
 		DisplayScores();
-#elif UNITY_IPHONE
+#else
 		if(sm_updateScoreNames)
 		{
 			if (keyboard.active){
