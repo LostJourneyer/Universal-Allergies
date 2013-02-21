@@ -8,7 +8,7 @@ public class HighScores : MonoBehaviour {
 	public Font scoreFont;
 	private string playerName="";
 	private TapLevelLoader tll;
-#if UNITY_IPHONE
+#if UNITY_IPHONE || UNITY_ANDROID
 	TouchScreenKeyboard keyboard;
 #endif
 
@@ -19,7 +19,7 @@ public class HighScores : MonoBehaviour {
 			sm_updateScoreNames=true;
 		else
 			sm_updateScoreNames=false;
-#if UNITY_IPHONE
+#if UNITY_IPHONE || UNITY_ANDROID
 		keyboard = TouchScreenKeyboard.Open(playerName,TouchScreenKeyboardType.Default);
 #endif
 	}
@@ -30,7 +30,7 @@ public class HighScores : MonoBehaviour {
 	}
 	void OnGUI()
 	{
-#if !UNITY_IPHONE
+#if !UNITY_IPHONE && !UNITY_ANDROID
 		if(sm_updateScoreNames)
 		{
 			// Make a text field that modifies stringToEdit.
