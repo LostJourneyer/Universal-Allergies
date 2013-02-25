@@ -85,8 +85,6 @@ public class HighScores : MonoBehaviour {
 		int top_offset = 20; // space on top for text box
 		int titlezone = 40; // vertical space for title of table
 		int boundary = 18; // space around table
-		int titlex = boundary; // x offset for title
-		int titley = top_offset; // y offset for title
 		int nameboxwidth = (int)(camera.pixelWidth*0.75 - boundary); // width of one table cell
 		int nameboxheight = (int)((camera.pixelHeight - top_offset - titlezone - 2*boundary) / 10); // height of one table cell
 		int scoreboxwidth = (int)(camera.pixelWidth/4 - boundary); // width of one table cell
@@ -135,7 +133,7 @@ public class HighScores : MonoBehaviour {
 				PlayerPrefs.SetInt("u_playerScore"+i, 0);
 			}
 		}
-
+		PlayerPrefs.SetInt("u_lastScore",score);
 		for(int i=0; i<10; i++){
 			if(PlayerPrefs.GetInt("u_playerScore"+i)<score){
 				for(int x=9; x>i;x--){

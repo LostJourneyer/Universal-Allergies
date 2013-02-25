@@ -75,7 +75,7 @@ public class HeartBeat : MonoBehaviour {
 			if(normalizedSpect>m_tolerance){
 				balance(ts.transform.position);
 			}else{
-				unbalance(.99f);
+				unbalance(.9f);
 			}
 		}else if(m_up){
 			if(normalizedSpect<m_tolerance){
@@ -100,7 +100,7 @@ public class HeartBeat : MonoBehaviour {
 		if(other.gameObject.tag=="Mass"){
 			Debug.Log(m_shieldGO.activeSelf);
 			HighScores.SetHighScore(sm_score);
-			Application.LoadLevel("HighScores");
+			Application.LoadLevel("DisplayScore");
 		}
 	}
 	

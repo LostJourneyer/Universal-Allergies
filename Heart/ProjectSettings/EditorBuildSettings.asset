@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/HeartOfTheUniverse.unity
   - enabled: 1
     path: Assets/HighScores.unity
+  - enabled: 1
+    path: Assets/DisplayScore.unity

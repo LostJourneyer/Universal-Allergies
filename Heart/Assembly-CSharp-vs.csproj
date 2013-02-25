@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\U_Scripts\DisplayScore.cs" />
      <Compile Include="Assets\U_Scripts\GravityManager.cs" />
      <Compile Include="Assets\U_Scripts\HeartBeat.cs" />
      <Compile Include="Assets\U_Scripts\HighScores.cs" />
